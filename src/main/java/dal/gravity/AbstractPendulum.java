@@ -12,6 +12,7 @@ public abstract class AbstractPendulum {
     private double stringLength, pointMass;
     protected double theta0; 
     protected double g; 
+    public static final double GRAVITY = 9.80665;
 
     /**
      * Creates a new Pendulum instance using
