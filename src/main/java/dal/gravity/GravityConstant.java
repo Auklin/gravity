@@ -8,7 +8,7 @@ public class GravityConstant implements GravityModel{
 	}
 	
 	@Override
-	public double getGravity(){
+	public double getGravitationalField(){
 		return g;
 	}
 }
