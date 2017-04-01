@@ -7,8 +7,6 @@ import java.text.NumberFormat;
  * versus the Euler algorithm approximation
  */
 public class PendulumRunner {
-	private static final double EarthGravity = 9.81;
-	private static final double JupiterGravity = 25;
 
     public static void main (String [] args) {
 		NumberFormat nf = NumberFormat.getInstance ();
