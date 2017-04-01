@@ -11,8 +11,9 @@ public abstract class AbstractPendulum {
      */
     private double stringLength, pointMass;
     protected double theta0; 
-    protected double g; 
-    public static final double GRAVITY = 9.80665;
+    //protected double g; 
+    //public static final double GRAVITY = 9.80665;
+    protected GravityModel g;
 
     /**
      * Creates a new Pendulum instance using
@@ -21,22 +22,23 @@ public abstract class AbstractPendulum {
      * inTheta0: angular displacement at t=0 (0<=theta0)
      * inG: gravitational field value to use
      */
-    public AbstractPendulum (double inLength, double inMass, double inTheta0, double inG) {
+    public AbstractPendulum (double inLength, double inMass, double inTheta0, GravityModel inG) {
 	if (validStringLength (inLength)) stringLength = inLength;
 	else throw new IllegalArgumentException ("invalid string length: " + inLength);
 	if (validPointMass(inMass)) pointMass = inMass;
 	else throw new IllegalArgumentException ("invalid point mass: " + inMass);
 	if (validDisplacement (inTheta0)) theta0 = inTheta0;
 	else throw new IllegalArgumentException 
-		 ("invalid angular displacement: " + inTheta0);
-	if (validGC (inG)) g = inG;
+		 ("invalid angular displacement: " + inTheta0); g=inG;
+	if (validGC (g)) g = inG;
 	else throw new IllegalArgumentException ("invalid local gravitational field: " + inG);
     }
+    
 
     private boolean validDisplacement (double val) { return (val >= 0); }
     private boolean validPointMass (double val) { return (val > 0); }
     private boolean validStringLength (double val) { return (val > 0); }
-    private boolean validGC (double val) { return (val >= 0); }
+    private boolean validGC (GravityModel val) { return (val.getGravity() >= 0); }
 
     public double getMaxAngularDisplacement () { return theta0; }
 
@@ -44,6 +46,8 @@ public abstract class AbstractPendulum {
 
     public double getStringLength () { return stringLength; }
 
-    public double getGravitationalField () { return g; }
+    public double getGravitationalField () { return g.getGravity(); }
+    
+    public void setGravity (GravityModel g){this.g=g;}
 
 }
